@@ -1,0 +1,1 @@
+@"node_modules/.bin/hermione" "hermione/simple.hermione.js"

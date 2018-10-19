@@ -1,4 +1,22 @@
  # Домашнее задание: автотесты
+  ## Запуск проекта
+```
+git clone git@github.com:dima117/shri-testing-homework.git
+cd shri-testing-homework.git
+npm i
+npm start
+```
+    
+  ## Запуск интеграционных тестов Windows
+```
+npm run selenium
+npm run hermione
+```
+
+  ## Запуск интеграционных тестов Mac
+```
+./node_modules/.bin/hermione hermione/simple.hermione.js
+```
   ## Описание логических блоков
  - git.js
    - ``gitHistory`` - получает список коммитов командой ``log`` для текущего репозиория, 
