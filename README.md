@@ -1,7 +1,7 @@
  # Домашнее задание: автотесты
   ## Запуск проекта
 ```
-git clone git@github.com:dima117/shri-testing-homework.git
+git clone https://github.com/Coudnet/shri-testing-homework.git
 cd shri-testing-homework.git
 npm i
 npm start
@@ -13,10 +13,28 @@ npm run selenium
 npm run hermione
 ```
 
-  ## Запуск интеграционных тестов Mac
-```
-./node_modules/.bin/hermione hermione/simple.hermione.js
-```
+  ## Интеграционный тест
+  
+   - Главная страница
+     - На главной отображается 20 элементов .commit
+     - На главной правильный breadcrumb, равный 'HISTORY'
+     
+   - Страница /files
+     - На старнице коммита 1bd9b4848866f8d83cbb45b45193c695ffebb282 отображается элемент .files-list
+     - Breadcrumbs - HISTORY / ROOT
+     - На странице 1bd9b4848866f8d83cbb45b45193c695ffebb282/public отображается элемент .files-list
+     - Breadcrumbs - HISTORY / ROOT / public
+   
+   - Страница файла .gitignore коммита 1bd9b4848866f8d83cbb45b45193c695ffebb282/ 
+     - На странице отображается элемент .file-conten
+     - Breadcrumb HISTORY / ROOT / .gitignore
+     
+   - Переходы с каждой страницы определяются как верный url после клика по нужной ссылке
+     - С главной на страницу с файловым деревом
+     - Со страницы файлового дерева на файл
+     - Со страницы файлового дерева на папку
+    
+  
   ## Описание логических блоков
  - git.js
    - ``gitHistory`` - получает список коммитов командой ``log`` для текущего репозиория, 
