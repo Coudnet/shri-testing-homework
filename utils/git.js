@@ -29,15 +29,14 @@ function parseHistoryItem(line) {
 /**
  * Логический модуль получения истории коммитов
  * Сценарии:
- * Запрос при пустом репозитории
- * Запрос на получение коммитов на первой странице
- * Запрос на получение коммитов на второй странице
- *
+ * Получить коммиты в пустом репозитории
+ * Получить коммиты на первой странице
+ * Получить коммиты на второй странице
  */
-function gitHistory(page = 1, size = 10) {
+function gitHistory(page = 1, size = 10, executeGitStub, parseHistoryItemStub) {
   const offset = (page - 1) * size;
 
-  return executeGit('git', [
+  return (executeGitStub() || executeGit('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -45,11 +44,11 @@ function gitHistory(page = 1, size = 10) {
     offset,
     '-n',
     size
-  ]).then(data => {
+  ])).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
-      .map(parseHistoryItem);
+      .map(parseHistoryItemStub || parseHistoryItem);
   });
 }
 
@@ -67,15 +66,16 @@ function parseFileTreeItem(line) {
  * Получить дерево файлов по пути path для коммита hash
  *
  */
-function gitFileTree(hash, path) {
+function gitFileTree(hash, path, executeGitStub, parseFileTreeItemStub) {
   const params = ['ls-tree', hash];
   path && params.push(path);
 
-  return executeGit('git', params).then(data => {
+
+  return (executeGitStub('git', params) || executeGit('git', params)).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
-      .map(parseFileTreeItem);
+      .map(parseFileTreeItemStub || parseFileTreeItem);
   });
 }
 
@@ -85,8 +85,8 @@ function gitFileTree(hash, path) {
  * Получить содержимое файла по hash
  *
  */
-function gitFileContent(hash) {
-  return executeGit('git', ['show', hash]);
+function gitFileContent(hash, executeGitStub) {
+  return (executeGitStub() || executeGit('git', ['show', hash]));
 }
 
 module.exports = {
