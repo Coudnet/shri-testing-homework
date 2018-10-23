@@ -26,6 +26,14 @@ function parseHistoryItem(line) {
   };
 }
 
+/**
+ * Логический модуль получения истории коммитов
+ * Сценарии:
+ * Запрос при пустом репозитории
+ * Запрос на получение коммитов на первой странице
+ * Запрос на получение коммитов на второй странице
+ *
+ */
 function gitHistory(page = 1, size = 10) {
   const offset = (page - 1) * size;
 
@@ -52,6 +60,13 @@ function parseFileTreeItem(line) {
   return { type, hash, path };
 }
 
+/**
+ * Логический модуль получения файлового дерева
+ * Сценарии:
+ * Получить дерево файлов для коммита hash
+ * Получить дерево файлов по пути path для коммита hash
+ *
+ */
 function gitFileTree(hash, path) {
   const params = ['ls-tree', hash];
   path && params.push(path);
@@ -64,6 +79,12 @@ function gitFileTree(hash, path) {
   });
 }
 
+/**
+ * Логический модуль получения содержимого текстового файла
+ * Сценарии:
+ * Получить содержимое файла по hash
+ *
+ */
 function gitFileContent(hash) {
   return executeGit('git', ['show', hash]);
 }

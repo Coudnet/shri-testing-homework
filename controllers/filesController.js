@@ -16,6 +16,11 @@ function buildObjectUrl(parentHash, { path, type }) {
   }
 }
 
+/**
+ * Логический модуль обработки запроса на просмотр файлов коммита
+ * Сценарии:
+ *
+ */
 module.exports = function(req, res, next) {
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);

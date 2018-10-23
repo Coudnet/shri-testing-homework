@@ -6,6 +6,13 @@ function buildFileUrl(parentHash, path) {
   return `/content/${parentHash}/${path}`;
 }
 
+/**
+ * Логический модуль создания хлебных крошек
+ * Сценарии:
+ * Отображение на главной странице. На главной странице Breadcrumbs должны быть равны HISTORY
+ * Отображение на страницах при просмотре папок файлового дерева в коммите. На странице файлового дерева для коммита hash Breadcrumbs должны быть равны HISTORY / ROOT / [path]
+ * Отображение на странице файла. На странице файла для коммита hash Breadcrumbs должны быть равны HISTORY / ROOT / path / filename
+ */
 function buildBreadcrumbs(hash, path) {
   const bc = [
     {
