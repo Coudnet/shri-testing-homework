@@ -4,6 +4,8 @@
 git clone https://github.com/Coudnet/shri-testing-homework.git
 cd shri-testing-homework.git
 npm i
+npm i --save-dev mocha
+npm i --save-dev chai
 npm start
 ```
     
