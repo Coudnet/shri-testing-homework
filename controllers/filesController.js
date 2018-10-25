@@ -22,6 +22,7 @@ function buildObjectUrl(parentHash, { path, type }) {
  *
  */
 module.exports = function(req, res, next) {
+
   const { hash } = req.params;
   const pathParam = (req.params[0] || '').split('/').filter(Boolean);
 

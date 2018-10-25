@@ -54,7 +54,4 @@ npm run hermione
      - На главной странице отображается только HISTORY
      - На странице файлового дерева отображается HISTORY / ROOT / [path]
      - На странице файла отображается HISTORY / ROOT / path / filename
-   
-   - ``indexController`` - 
-   - ``filesController`` - 
-   - ``contentController`` -
+  

@@ -36,7 +36,7 @@ function parseHistoryItem(line) {
 function gitHistory(page = 1, size = 10, executeGitStub, parseHistoryItemStub) {
   const offset = (page - 1) * size;
 
-  return (executeGitStub() || executeGit('git', [
+  return (executeGitStub || executeGit)('git', [
     'log',
     '--pretty=format:%H%x09%an%x09%ad%x09%s',
     '--date=iso',
@@ -44,7 +44,7 @@ function gitHistory(page = 1, size = 10, executeGitStub, parseHistoryItemStub) {
     offset,
     '-n',
     size
-  ])).then(data => {
+  ]).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
@@ -71,7 +71,7 @@ function gitFileTree(hash, path, executeGitStub, parseFileTreeItemStub) {
   path && params.push(path);
 
 
-  return (executeGitStub('git', params) || executeGit('git', params)).then(data => {
+  return (executeGitStub || executeGit)('git', params).then(data => {
     return data
       .split('\n')
       .filter(Boolean)
@@ -86,7 +86,7 @@ function gitFileTree(hash, path, executeGitStub, parseFileTreeItemStub) {
  *
  */
 function gitFileContent(hash, executeGitStub) {
-  return (executeGitStub() || executeGit('git', ['show', hash]));
+  return (executeGitStub || executeGit)('git', ['show', hash]);
 }
 
 module.exports = {
